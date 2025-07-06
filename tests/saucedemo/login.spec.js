@@ -31,7 +31,7 @@ test('Should not login successfully', async ({ page }) => {
 
 
 
-/* 
+/* For login successfully
 Create new folder 'saucedemo'
 Create new spec_file 'login.spec.js'
 run command npx playwright codegen https://www.saucedemo.com/
@@ -47,4 +47,18 @@ Add codes for expected value for toHaveURL and screenshot snap
 run command npx playwright test tests/saucedemo/login.spec.js --project chromium --ui
 If passed, notice that under parent file, test - screenshots folder is automatically added or created
 The test - screenshots folder contain snap images of expected results 
+*/
+
+/* For login unsuccessfully
+run command npx playwright codegen https://www.saucedemo.com/
+record actions and assertions (input invalid credentials)
+Copy codes to the created spec file
+run command npx playwright test tests/saucedemo/login.spec.js --project chromium --ui
+Edit codes to expected values for username and password (same inalid credentials)
+Again, run command npx playwright test tests/saucedemo/login.spec.js --project chromium --ui
+if passed,  run command npx playwright codegen https://www.saucedemo.com/ 
+Record assertions (check for URL(same link))
+Add codes for expected value for toHaveURL and screenshot snap (change ss name)
+run command npx playwright test tests/saucedemo/login.spec.js --project chromium --ui
+If passed, test - screenshot folder should contain the snap screenshot of failed login
 */
