@@ -1,31 +1,41 @@
+// test file for https://www.saucedemo.com/ login feature
 import { test, expect } from '@playwright/test';
 
+// test function to verify login with a valid user
 test('Verify login with valid credentials', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
   await page.locator('[data-test="username"]').fill('visual_user');
   await page.locator('[data-test="password"]').fill('secret_sauce');
   await page.locator('[data-test="login-button"]').click();
-  await expect(page.getByText('Swag Labs')).toBeVisible()
+  await expect(page.getByText('Swag Labs')).toBeVisible();
 });
 
-test('Verify login fails with invalid credentials', async ({ page }) => {
+//test function to verify login with wrong password
+test('Verify login with correct username wrong password', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
   await page.locator('[data-test="username"]').fill('visual_user');
-  await page.locator('[data-test="password"]').fill('secret_sauces');
-  await page.locator('[data-test="error"]').click();
-  await page.locator('div').filter({ hasText: /^Epic sadface: Username and password do not match any user in this service$/ }).click();
+  await page.locator('[data-test="password"]').fill('sauce_secret');
+  await page.locator('[data-test="login-button"]').click();
+  await expect(page.locator('[data-test="error"]')).toBeVisible();
+  await expect(page.locator('[data-test="error"]')).toContainText('Epic sadface: Username and password do not match any user in this service');
 });
 
-test('Verify login with blank username but correct password', async ({ page }) => {
+//test function to verify login with blank username
+test('Verify login with null username and correct password', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
+  await page.locator('[data-test="username"]').click();
   await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="error"]').click();
-  await page.locator('div').filter({ hasText: /^Epic sadface: Username is required$/ }).click();
+  await page.locator('[data-test="login-button"]').click();
+  await expect(page.locator('[data-test="error"]')).toBeVisible();
+  await expect(page.locator('[data-test="error"]')).toContainText('Epic sadface: Username is required');
 });
 
-test('Verify login with correct username but blank password', async ({ page }) => {
+//test function to verify login with blank password
+test('Verify login with correct username and null password', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
   await page.locator('[data-test="username"]').fill('visual_user');
-  await page.locator('[data-test="error"]').click();
-  await page.locator('div').filter({ hasText: /^Epic sadface: Password is required$/ }).click();
+  await page.locator('[data-test="password"]').click();
+  await page.locator('[data-test="login-button"]').click();
+  await expect(page.locator('[data-test="error"]')).toBeVisible();
+  await expect(page.locator('[data-test="error"]')).toContainText('Epic sadface: Password is required');
 });
