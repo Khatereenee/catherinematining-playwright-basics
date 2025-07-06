@@ -1,8 +1,21 @@
+# Node modules
+node_modules/
 
-# Playwright
-node_modules/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-node_modules/
+# Playwright test result directories
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# VS Code settings (optional)
+.vscode/
+
+# OS junk files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
