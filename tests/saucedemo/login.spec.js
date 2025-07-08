@@ -15,7 +15,7 @@ test('Should login successfully', async ({ page }) => {
   await page.screenshot({path: 'test - screenshots/successful-login.png', fullPage: true })
 });
 
-// test function to verify login with a invalid credentials
+// test function to verify login with invalid credentials
 test('Should not login successfully', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
   await page.locator('[data-test="username"]').fill('invalid_user');
