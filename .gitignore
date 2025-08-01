@@ -6,6 +6,9 @@ test-results/
 playwright-report/
 blob-report/
 playwright/.cache/
+test-screenshots/
+.env
+.auth.
 
 # VS Code settings (optional)
 .vscode/

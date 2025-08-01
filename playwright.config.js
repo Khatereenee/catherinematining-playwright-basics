@@ -1,12 +1,13 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'path';
 
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// import dotenv from 'dotenv';
-// import path from 'path';
+
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
@@ -14,6 +15,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './tests',
+  timeout: 60_000,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -35,20 +37,43 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+     {
+      name: "setup",
+      testMatch: "**/*.setup.ts",
+    },
+    {
+      name: "e2e",
+      dependencies: ["setup"],
+      use: {
+        storageState: STORAGE_STATE,
+        ...devices["Desktop Chrome"],
+        launchOptions: {
+          args: ["--start-maximized"],
+        },
+      },
+    },
+    {
+      name: "api",
+      testMatch: "**/*api.spec.ts",
+    },
+    /*
+
+
+
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {

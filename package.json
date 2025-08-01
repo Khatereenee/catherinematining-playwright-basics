@@ -3,7 +3,29 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+     "example-test": "npx playwright test tests/example.spec.ts --project chromium",
+     "login-test-grep": "npx playwright test tests/features/login.spec.ts --project chromium --grep=@HappyPath",
+     "login-test": "npx playwright test tests/features/login.spec.ts --project chromium",
+      "login-test-trace": "npx playwright test tests/features/login.spec.ts --project chromium --trace on",
+      "user-mngt-test": "npx playwright test tests/features/user-mngt.spec.ts --project chromium",
+      "auth-setup": "npx playwright test tests/auth.setup.ts --project setup",
+      "e2e-test": " npx playwright test e2e.spec.ts --project e2e",
+      "orange-test": "npx playwright test user-mngt.spec.ts --project chromium",
+      "register-test": "npx playwright test registration.spec.ts --project chromium",
+      "faker-test": "npx playwright test faker.spec.ts --project chromium",
+      "api-test": "npx playwright test json.api.spec.ts --project api --ui",
+      "pw-plugin-api-test": "npx playwright test pw-plugin-api.spec.ts --project api",
+      "fake-store-api": "npx playwright test fake-store.api.spec.ts --project api",
+      "todo-api-test": "npx playwright test todo.api.spec.ts --project chromium",
+      "adv-locator": "npx playwright test tests/advance-locators/advance-locators.spec.ts --project chromium",
+      "auto-exec-test": "npx playwright test product-details-v2.spec.ts --project chromium",
+      "auto-exec-test-1": "npx playwright test product-details.spec.ts --project chromium",
+      "mix-test": "npx playwright test tests/mix-tests/ --project chromium"
+
+
+    
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Khatereenee/catherinematining-playwright-basics.git"
@@ -18,5 +40,8 @@
   "devDependencies": {
     "@playwright/test": "^1.53.1",
     "@types/node": "^24.0.7"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.0"
   }
 }
